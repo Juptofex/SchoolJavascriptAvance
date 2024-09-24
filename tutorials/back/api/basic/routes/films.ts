@@ -11,6 +11,24 @@ const films: Film[] = [
         description: "Two imprisoned",
         imageUrl: "https://www.imdb.com/title/tt0111161/mediaviewer/rm10105600",
     },
+    {
+        id: 2,
+        title: "The Godfather",
+        director: "Francis Ford Coppola",
+        duration: 175,
+        budget: 6000000,
+        description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+        imageUrl: "https://www.imdb.com/title/tt0068646/mediaviewer/rm10105600",
+    },
+    {
+        id: 3,
+        title: "The Dark Knight",
+        director: "Christopher Nolan",
+        duration: 152,
+        budget: 185000000,
+        description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+        imageUrl: "https://www.imdb.com/title/tt0468569/mediaviewer/rm10105600",
+    },
 ];
 
 const router = Router();
@@ -25,16 +43,6 @@ router.get("/", (req, res) => {
         return film.duration >= minimumDuration
     });
     return res.json(filteredFilms);
-});
-
-router.get("/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const film = films.find((film) => film.id === id);
-    if (film) {
-        res.json(film);
-    } else {
-        res.sendStatus(404);
-    }
 });
 
 router.post("/", (req, res) => {
@@ -74,5 +82,26 @@ router.post("/", (req, res) => {
     return res.json(newFilm);
 });
 
+router.get("/search", (req, res) => {
+    if (!req.query["title"] || typeof req.query["title"] !== "string") {
+        return res.sendStatus(400);
+      }
+    const title: string = req.query["title"];
+    const filteredFilms = films.filter((film) => {
+        return film.title.startsWith(title);
+    });
+    return res.json(filteredFilms);
+});
+
+//laisse ce truc a la fin !
+router.get("/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const film = films.find((film) => film.id === id);
+    if (film) {
+        res.json(film);
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 export default router;
