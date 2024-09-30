@@ -5,7 +5,7 @@ GET {{baseUrl}}/films
 ### Read a single film
 GET {{baseUrl}}/films/3
 
-### Read all drinks longuer than 2 hours
+### Read all drinks longer than 2 hours
 GET {{baseUrl}}/films/?minimum-duration=120
 
 ### Create a film

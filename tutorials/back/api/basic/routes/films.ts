@@ -35,12 +35,14 @@ const router = Router();
 
 router.get("/", (req, res) => {
     if (!req.query["minimum-duration"]) {
-        // Cannot call req.query.minimum-duration as "-" is an operator
         return res.json(films);
-      }
+    }
     const minimumDuration = Number(req.query["minimum-duration"]);
+    if (isNaN(minimumDuration) || minimumDuration <= 0) {
+        return res.status(400).json({ error: "Invalid minimum duration parameter" });
+    }
     const filteredFilms = films.filter((film) => {
-        return film.duration >= minimumDuration
+        return film.duration >= minimumDuration;
     });
     return res.json(filteredFilms);
 });
@@ -64,6 +66,10 @@ router.post("/", (req, res) => {
     }
 
     const { title, director, duration, budget, description, imageUrl } = body as Film;
+
+    if (films.some((film)=> film.title === title && film.director === director)) {
+        return res.sendStatus(409);
+    }
 
     const nextId =
         films.reduce((maxId, film) => (film.id > maxId ? film.id : maxId), 0) + 1;
