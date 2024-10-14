@@ -1,4 +1,5 @@
 import "./App.css";
+import Cinema from "../Cinema";
 
 interface PageTitleProps {
   title: string;
@@ -6,37 +7,6 @@ interface PageTitleProps {
 
 const PageTitle = ({ title }: PageTitleProps) => {
   return <h1>{title}</h1>;
-};
-
-interface Movie {
-  title: string;
-  director: string;
-}
-
-const Movie = ({ title, director }: Movie) => {
-  return (
-    <li>
-      <strong>{title}</strong> - Réalisateur : {director}
-    </li>
-  );
-};
-
-interface CinemaProps {
-  name: string;
-  movies: Movie[];
-}
-
-const Cinema = ({ name, movies }: CinemaProps) => {
-  return (
-    <div>
-      <h2>{name}</h2>
-      <ul>
-        {movies.map((movie, index) => (
-          <Movie key={index} {...movie} />
-        ))}
-      </ul>
-    </div>
-  );
 };
 
 const App = () => {
