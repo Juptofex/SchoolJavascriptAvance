@@ -1,13 +1,8 @@
 import "./App.css";
 import Cinema from "../Cinema";
-
-interface PageTitleProps {
-  title: string;
-}
-
-const PageTitle = ({ title }: PageTitleProps) => {
-  return <h1>{title}</h1>;
-};
+import { Header } from "../Header";
+import { Footer } from "../Footer";
+import { PageTitle } from "../PageTitle";
 
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
@@ -56,13 +51,16 @@ const moviesCinema2 = [
 
   
   return (
-    <div>
+    <main>
+      <Header 
+        logo="https://images.unsplash.com/photo-1728926125424-9b0eb80b9d86?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        children={<p>Cinemas de Vinci</p>}
+      >
+      </Header>
       <PageTitle title={pageTitle} />
-
       <Cinema name={cinema1Name} movies= {moviesCinema1} />
-
       <Cinema name={cinema2Name} movies={moviesCinema2} />
-    </div>
+    </main>
   );
 };
 
