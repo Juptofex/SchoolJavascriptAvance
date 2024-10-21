@@ -3,12 +3,12 @@ interface Movie {
     director: string;
   }
   
-  const Movie = ({ title, director }: Movie) => {
-    return (
-      <li>
-        <strong>{title}</strong> - Réalisateur : {director}
-      </li>
-    );
-  };
+const Movie = ({ title, director }: Movie) => {
+  return (
+    <li>
+      <strong>{title}</strong> - Réalisateur : {director}
+    </li>
+  );
+};
 
   export default Movie;
