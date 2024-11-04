@@ -1,33 +1,107 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { SyntheticEvent, useState } from 'react'
 import './App.css'
+import { Movie } from './types'
+import MovieList from './Main/MovieList'
+
+const defaultMovies = [
+  {
+    titre: "The Matrix",
+    director: "Lana Wachowski, Lilly Wachowski",
+    length: 136,
+  },
+  {
+    titre: "The Matrix Reloaded",
+    director: "Lana Wachowski, Lilly Wachowski",
+    length: 138,
+  },
+  {
+    titre: "The Matrix Revolutions",
+    director: "Lana Wachowski, Lilly Wachowski",
+    length: 129,
+  },
+  {
+    titre: "The Matrix Resurrections",
+    director: "Lana Wachowski",
+    length: 148,
+  },
+  {
+    titre: "Inception",
+    director: "Christopher Nolan",
+    length: 148,
+  }
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [movie, setMovie] = useState('')
+  const [director, setDirector] = useState('')
+  const [length, setLength] = useState(0)
+  const [movies, setMovies] = useState(defaultMovies)
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault()
+    console.log('submit:', movie, director, length)
+    const newMovie: Movie = {
+      titre: movie,
+      director: director,
+      length: length,
+    };
+
+    setMovies([...movies, newMovie])
+  };
+
+  const handleMovieChange = (e: SyntheticEvent) => {
+    const movieInput = e.target as HTMLInputElement
+    console.log('change in movieInput:', movieInput.value)
+    setMovie(movieInput.value)
+  };
+
+  const handleDirectorChange = (e: SyntheticEvent) => {
+    const directorInput = e.target as HTMLInputElement
+    console.log('change in directorInput:', directorInput.value)
+    setDirector(directorInput.value)
+  };
+
+  const handleLengthChange = (e: SyntheticEvent) => {
+    const lengthInput = e.target as HTMLInputElement
+    console.log('change in lengthInput:', lengthInput.value)
+    setLength(parseInt(lengthInput.value))
+  };
 
   return (
     <>
+      <MovieList movies={movies} />
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor='movie'>movie</label>
+          <input
+            value={movie}
+            type='text'
+            id='movie'
+            name='movie'
+            onChange={handleMovieChange}
+            required
+          />
+          <label htmlFor='director'>director</label>
+          <input
+            value={director}
+            type='text'
+            id='director'
+            name='director'
+            onChange={handleDirectorChange}
+            required
+          />
+          <label htmlFor='length'>length</label>
+          <input
+            value={length}
+            type='number'
+            id='length'
+            name='length'
+            onChange={handleLengthChange}
+            required
+          />
+          <button  type='submit'>Ajouter</button>
+        </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
