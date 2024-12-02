@@ -1,6 +1,7 @@
 # Destructuring et l'état
 ## Destructuring 
 
+
 Un premier exemple de "destructing assignment" a déjà été présenté dans ce cours : [apprentissage de JS](https://e-vinci.github.io/web2/part0/js-language/#le_destructuring_assignment).
 
 Nous souhaitons améliorer la lisibilité de notre code et ne plus avoir à taper `props.nomDeLaProps` au sein de nos composants React.
