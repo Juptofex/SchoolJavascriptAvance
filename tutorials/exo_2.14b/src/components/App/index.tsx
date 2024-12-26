@@ -22,9 +22,9 @@ function App() {
         <div>
           <h1>Here's three random dog :</h1>
           <div id='random-dogs'>
-            <RandomDog refresh={refresh} />
-            <RandomDog refresh={refresh} />
-            <RandomDog refresh={refresh} />
+            <RandomDog />
+            <RandomDog />
+            <RandomDog />
           </div>
         </div>
       </div>
