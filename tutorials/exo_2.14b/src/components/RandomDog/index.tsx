@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-interface RandomDogProps {
-    refresh: number;
-}
+// interface RandomDogProps {
+//     refresh: number;
+// }
 
-const RandomDog = ({ refresh }: RandomDogProps) => {
+const RandomDog = () => {
     const [dog, setDog] = useState<string | null>(null);
 
     const fetchDog = async () => {
